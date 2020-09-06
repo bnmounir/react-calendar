@@ -3,6 +3,7 @@ import FullCalendar, { formatDate } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import moment from 'moment';
 
 import Modal from '../Modal';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
@@ -17,6 +18,7 @@ export default class App extends React.Component {
     handleToggle = () => this.setState({ showModal: !this.state.showModal });
 
     render() {
+        // console.log(this.state.currentEvents);
         return (
             <div className='demo-app'>
                 {this.renderSidebar()}
@@ -97,21 +99,28 @@ export default class App extends React.Component {
     };
 
     handleDateSelect = (selectInfo) => {
-        console.log(selectInfo);
+        let start = moment(selectInfo.startStr).format('YYYY-MM-DD HH:mm a');
+        let end = moment(selectInfo.endStr).format('YYYY-MM-DD HH:mm a');
+        // let end = moment(selectInfo.end).format('YYYY-MM-DD HH:mm a');
+        console.log(start, end);
         this.handleToggle();
         // change this to be in the modal instead of a prompt
         // let title = prompt('Please enter a new title for your event');
         let calendarApi = selectInfo.view.calendar;
 
         calendarApi.unselect(); // clear date selection
-        let title = 'title hardcoded in app.js line 120';
+        let title = 'title hardcoded in app.js line 108';
         if (title) {
             calendarApi.addEvent({
                 id: createEventId(),
                 title,
-                start: selectInfo.startStr,
-                end: selectInfo.endStr,
-                allDay: selectInfo.allDay,
+                // backgroundColor: 'yellow',
+                // textColor: 'black',
+                start,
+                // start: selectInfo.startStr,
+                end,
+                // end: selectInfo.endStr,
+                allDay: false,
             });
         }
     };
