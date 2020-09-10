@@ -11,6 +11,8 @@ aspects: - react-hook-form: to create an event - react-modal: to contain the for
     - bootstrapped the react version for fullcalendar
     - built the modal with react-modal and made the activation on event creation event
     - built a static version of the form
+    
+[Flowchart here](https://whimsical.com/XcppHNx4ogeMdRfFAQtxe3)
 
 ### up next:
 
